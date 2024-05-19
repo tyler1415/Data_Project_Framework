@@ -3,7 +3,7 @@ import pyodbc
 # Connect and pull data from a SQL Server database.
 class Database:
 
-    # Class Attributes for SQL Server database. Note. These variables will change depending on computer and project.
+    # Class Attributes for SQL Server database. Note: These variables will change depending on computer and project.
     Driver = '{ODBC Driver 17 for SQL Server}'
     Server = 'DESKTOP-OFNPJHO'
     Database = 'change_Var'
@@ -16,7 +16,6 @@ class Database:
         self.Database = Database
         self.Trusted_Connection = Trusted_Connection
 
-    # Properties
     @property
     def EstablishConnection(self):
         return f'''DRIVER={self.Driver};
