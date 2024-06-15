@@ -1,5 +1,6 @@
-from db_connection import Database_Connection
 import sqlalchemy
+from database.db_connection import Database_Connection
+
 
 db = Database_Connection(driver='ODBC+Driver+17+for+SQL+Server',server='DESKTOP-OFNPJHO',database='PakistanUsedCars',trusted_connection='yes')
 engine = db.create_db_engine()
