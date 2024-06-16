@@ -27,6 +27,7 @@ class Database:
             return None
         
     def load_query(self, query_file):
+        '''Note: use rf'' when defining the absolute query path'''
         current_dir = os.path.dirname(os.path.abspath(__file__))
         query_file = os.path.join(current_dir, 'sql', query_file)
         with open(query_file, 'r') as file:
@@ -39,7 +40,6 @@ class Database:
         with engine.connect() as connection:
             result = connection.execute(sqlalchemy.text(query))
             df = pd.DataFrame(result.fetchall(), columns=result.keys())
-            print(df)
         return df
         
 
