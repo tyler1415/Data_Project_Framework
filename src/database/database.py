@@ -1,11 +1,11 @@
 import os
-import pandas as pd
 import sqlalchemy
+import pandas as pd
 from sqlalchemy.exc import SQLAlchemyError as exception
 
 
 # Connect and pull data from a SQL Server database.
-class Database:
+class database:
 
     def __init__(self, driver, server, database, trusted_connection):
         self.driver = driver
@@ -15,6 +15,7 @@ class Database:
 
     def connection_url(self):
         '''Note: Driver must have '+' between words'''
+        '''Example: Database(driver='ODBC+Driver+17+for+SQL+Server',server='DESKTOP-OFNPJHO',database='PakistanUsedCars',trusted_connection='yes')'''
         connection_url = f"mssql+pyodbc://{self.server}/{self.database}?driver={self.driver};Trusted_Connection={self.trusted_connection}"
         return connection_url
 
@@ -49,4 +50,4 @@ class Database:
             return df
         except exception as e:
             print(f"Error executing query: {e}")
-            return None        
+            return None 
