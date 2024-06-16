@@ -14,6 +14,7 @@ class Database:
         self.trusted_connection = trusted_connection
 
     def connection_url(self):
+        '''Note: Driver must have '+' between words'''
         connection_url = f"mssql+pyodbc://{self.server}/{self.database}?driver={self.driver};Trusted_Connection={self.trusted_connection}"
         return connection_url
 
@@ -30,19 +31,22 @@ class Database:
         '''Note: use rf'' when defining the absolute query path'''
         current_dir = os.path.dirname(os.path.abspath(__file__))
         query_file = os.path.join(current_dir, 'sql', query_file)
-        with open(query_file, 'r') as file:
-            query = file.read()
-        return query
+        try:
+            with open(query_file, 'r') as file:
+                query = file.read()
+            return query
+        except exception as e:
+            print(f"Error loading query: {e}")
+            return None
 
     def execute_query(self, query_file):        
         engine = self.create_db_engine()
         query = self.load_query(query_file)
-        with engine.connect() as connection:
-            result = connection.execute(sqlalchemy.text(query))
-            df = pd.DataFrame(result.fetchall(), columns=result.keys())
-        return df
-        
-
-        
-    
-        
+        try: 
+            with engine.connect() as connection:
+                result = connection.execute(sqlalchemy.text(query))
+                df = pd.DataFrame(result.fetchall(), columns=result.keys())
+            return df
+        except exception as e:
+            print(f"Error executing query: {e}")
+            return None        
