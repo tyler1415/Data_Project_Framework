@@ -1,12 +1,7 @@
-import sqlalchemy
-from database.db_connection import Database_Connection
+from database.database import Database
 
+db = Database(driver='ODBC+Driver+17+for+SQL+Server',server='DESKTOP-OFNPJHO',database='PakistanUsedCars',trusted_connection='yes')
+query_file = rf"C:\Users\tgmce\OneDrive\Desktop\Data_Project_Framework\src\resources\sql\query_1.sql"
+result = db.execute_query(query_file)
 
-db = Database_Connection(driver='ODBC+Driver+17+for+SQL+Server',server='DESKTOP-OFNPJHO',database='PakistanUsedCars',trusted_connection='yes')
-engine = db.create_db_engine()
-
-# Test the connection by executing a simple query
-with engine.connect() as connection:
-    result = connection.execute(sqlalchemy.text("SELECT count(*) FROM UsedCarsFinal"))
-    for row in result:
-        print(row)
+print(result['name'])
