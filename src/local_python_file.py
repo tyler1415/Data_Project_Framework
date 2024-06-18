@@ -1,5 +1,5 @@
-from _001_database.database import database
-from _002_exploratory_data_analysis.exploratory_data_analysis import exploratory_data_analysis
+from _001_data_engineering.database.database import database
+from _002_data_analysis.exploratory_data_analysis.exploratory_data_analysis import exploratory_data_analysis
 
 
 db = database(driver='ODBC+Driver+17+for+SQL+Server',server='DESKTOP-OFNPJHO',database='PakistanUsedCars',trusted_connection='yes')
